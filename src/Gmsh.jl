@@ -3,8 +3,12 @@ module Gmsh
 using Pkg.Artifacts
 
 gmsh_path = artifact"gmsh"
-tmp = readdir(gmsh_path,join=true)[1]
+dirs      = readdir(gmsh_path,join=true)
 
-include(joinpath(tmp,"lib","gmsh.jl"))
+@assert length(dirs)==1 "there should be only one directory for the untared gmsh file. Got $dirs"
+
+include(joinpath(first(dirs),"lib","gmsh.jl"))
+
+export gmsh
 
 end # module

@@ -4,7 +4,5 @@ authors = ["Luiz M. Faria <maltezfaria@gmail.com>"]
 version = "0.1.0"
 
 [deps]
-Inflate = "d25df0c9-e2be-5dd7-82c8-3ad0b3e990b9"
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
-SHA = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-Tar = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
+Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
