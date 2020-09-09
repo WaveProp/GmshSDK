@@ -1,0 +1,10 @@
+# version 4.6.0 of gmsh
+
+[[gmsh]]
+git-tree-sha1 = "73dcca3f4136dde3813cab497eb3c41eb35f5468"
+os = "linux"
+arch = "x86_64"
+
+    [[gmsh.download]]
+    sha256 = "0de0c9741cd5dbbf6becd7de60ff446f344f763567146227c7e4c5648a2a8609"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64-sdk.tgz"
