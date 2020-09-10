@@ -1,4 +1,4 @@
-using Gmsh
+using GmshSDKPlus
 
 gmsh.initialize()
 gmsh.finalize()
