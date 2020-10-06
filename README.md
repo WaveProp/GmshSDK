@@ -1,0 +1,24 @@
+# GmshSDK.jl
+*Julia artifacts for [Gmsh Software Development Kit](https://gmsh.info/#Download)*
+
+![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+![CI](https://github.com/maltezfaria/GmshSDK/workflows/CI/badge.svg?branch=master)
+
+## Installation
+Install from the Pkg REPL:
+```
+pkg> add https://github.com/maltezfaria/HMatrices
+```
+
+## Usage
+
+This package defines in its `Artifacts.toml` the information required to download a given version of *Gmsh Software Development Toolkit*. It then exports the *gmsh* module so that you can call the Gmsh API. Basic usage is:
+
+```julia
+using GmshSDK
+gmsh.initialize()
+# do gmsh-fu
+gmsh.finalize()
+```
+
+See the [api manual](https://gmsh.info/doc/texinfo/gmsh.html#Gmsh-API) for more information on what you can with `gmsh`.
