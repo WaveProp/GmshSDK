@@ -7,7 +7,7 @@
 ## Installation
 Install from the Pkg REPL:
 ```
-pkg> add https://github.com/maltezfaria/HMatrices
+pkg> add https://github.com/WaveProp/GmshSDK
 ```
 
 ## Usage
