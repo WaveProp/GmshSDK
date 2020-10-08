@@ -2,7 +2,7 @@
 *Julia artifacts for [Gmsh Software Development Kit](https://gmsh.info/#Download)*
 
 ![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
-![CI](https://github.com/WaveProp/GmshSDK/workflows/CI/badge.svg?branch=master)
+![CI](https://github.com/WaveProp/GmshSDK/workflows/CI/badge.svg?branch=main)
 
 ## Installation
 Install from the Pkg REPL:
