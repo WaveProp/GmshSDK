@@ -7,7 +7,7 @@
 ## Installation
 Install from the Pkg REPL:
 ```
-pkg> add https://github.com/WaveProp/GmshSDK
+pkg> add GmshSDK
 ```
 
 ## Usage
