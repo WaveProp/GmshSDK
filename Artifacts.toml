@@ -1,117 +1,126 @@
-[["gmsh4.6.0"]]
-arch = "aarch64"
-git-tree-sha1 = "73dcca3f4136dde3813cab497eb3c41eb35f5468"
-lazy = true
-libc = "glibc"
-os = "linux"
-
-    [["gmsh4.6.0".download]]
-    sha256 = "0de0c9741cd5dbbf6becd7de60ff446f344f763567146227c7e4c5648a2a8609"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64-sdk.tgz"
-    
-[["gmsh4.6.0"]]
-arch = "armv7l"
-git-tree-sha1 = "74dc31eee19e11e3ff97e2d464296a77c6040638"
-lazy = true
-libc = "glibc"
-os = "linux"
-
-    [["gmsh4.6.0".download]]
-    sha256 = "864307ba8e08889602f027f79aa99ea7e323f1e0a7e32556f5c1f29914aa6552"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux32-sdk.tgz"
-
-[["gmsh4.6.0"]]
-arch = "armv7l"
-git-tree-sha1 = "74dc31eee19e11e3ff97e2d464296a77c6040638"
-lazy = true
-libc = "musl"
-os = "linux"
-
-    [["gmsh4.6.0".download]]
-    sha256 = "864307ba8e08889602f027f79aa99ea7e323f1e0a7e32556f5c1f29914aa6552"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux32-sdk.tgz"
-
-[["gmsh4.6.0"]]
+[["gmsh4.7.0"]]
 arch = "powerpc64le"
-git-tree-sha1 = "73dcca3f4136dde3813cab497eb3c41eb35f5468"
+git-tree-sha1 = "6aa9ca1a8c1fdaad93eb862369e7c8f59e2c863a"
 lazy = true
 libc = "glibc"
 os = "linux"
 
-    [["gmsh4.6.0".download]]
-    sha256 = "0de0c9741cd5dbbf6becd7de60ff446f344f763567146227c7e4c5648a2a8609"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64-sdk.tgz"
-
-[["gmsh4.6.0"]]
-arch = "aarch64"
-git-tree-sha1 = "73dcca3f4136dde3813cab497eb3c41eb35f5468"
-lazy = true
-libc = "musl"
-os = "linux"
-
-    [["gmsh4.6.0".download]]
-    sha256 = "0de0c9741cd5dbbf6becd7de60ff446f344f763567146227c7e4c5648a2a8609"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64-sdk.tgz"
-    
-[["gmsh4.6.0"]]
-arch = "i686"
-git-tree-sha1 = "74dc31eee19e11e3ff97e2d464296a77c6040638"
+    [["gmsh4.7.0".download]]
+    sha256 = "75f659d8f3af4d60617f6c1f423ac34e473da586511c8be3f9b7e1cd0f1c8bee"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux64-sdk.tgz"
+[["gmsh4.7.0"]]
+arch = "armv7l"
+git-tree-sha1 = "6891fcedf84b53130327a3a85982b82660265629"
 lazy = true
 libc = "glibc"
 os = "linux"
 
-    [["gmsh4.6.0".download]]
-    sha256 = "864307ba8e08889602f027f79aa99ea7e323f1e0a7e32556f5c1f29914aa6552"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux32-sdk.tgz"
-
-[["gmsh4.6.0"]]
+    [["gmsh4.7.0".download]]
+    sha256 = "28e437c038d5e9da76c51281f261e4c789e154fa56aeee1bf3beac018622b849"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux32-sdk.tgz"
+[["gmsh4.7.0"]]
 arch = "x86_64"
-git-tree-sha1 = "73dcca3f4136dde3813cab497eb3c41eb35f5468"
+git-tree-sha1 = "6aa9ca1a8c1fdaad93eb862369e7c8f59e2c863a"
 lazy = true
 os = "freebsd"
 
-    [["gmsh4.6.0".download]]
-    sha256 = "0de0c9741cd5dbbf6becd7de60ff446f344f763567146227c7e4c5648a2a8609"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64-sdk.tgz"
-[["gmsh4.6.0"]]
+    [["gmsh4.7.0".download]]
+    sha256 = "75f659d8f3af4d60617f6c1f423ac34e473da586511c8be3f9b7e1cd0f1c8bee"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux64-sdk.tgz"
+[["gmsh4.7.0"]]
 arch = "i686"
-git-tree-sha1 = "74dc31eee19e11e3ff97e2d464296a77c6040638"
-lazy = true
-libc = "musl"
-os = "linux"
-
-    [["gmsh4.6.0".download]]
-    sha256 = "864307ba8e08889602f027f79aa99ea7e323f1e0a7e32556f5c1f29914aa6552"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux32-sdk.tgz"
-    
-[["gmsh4.6.0"]]
-arch = "x86_64"
-git-tree-sha1 = "51d52924bb0db6bddc5a5ebe7f37396712bb9091"
-lazy = true
-os = "macos"
-
-    [["gmsh4.6.0".download]]
-    sha256 = "79d218789f6ad55762741284e55b4b42624f9905723f8a72aaa9615134214257"
-    url = "https://gmsh.info/bin/MacOSX/gmsh-4.6.0-MacOSX-sdk.tgz"
-    
-[["gmsh4.6.0"]]
-arch = "x86_64"
-git-tree-sha1 = "73dcca3f4136dde3813cab497eb3c41eb35f5468"
+git-tree-sha1 = "6891fcedf84b53130327a3a85982b82660265629"
 lazy = true
 libc = "glibc"
 os = "linux"
 
-    [["gmsh4.6.0".download]]
-    sha256 = "0de0c9741cd5dbbf6becd7de60ff446f344f763567146227c7e4c5648a2a8609"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64-sdk.tgz"
-
-[["gmsh4.6.0"]]
+    [["gmsh4.7.0".download]]
+    sha256 = "28e437c038d5e9da76c51281f261e4c789e154fa56aeee1bf3beac018622b849"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux32-sdk.tgz"
+[["gmsh4.7.0"]]
 arch = "x86_64"
-git-tree-sha1 = "73dcca3f4136dde3813cab497eb3c41eb35f5468"
+git-tree-sha1 = "6aa9ca1a8c1fdaad93eb862369e7c8f59e2c863a"
 lazy = true
 libc = "musl"
 os = "linux"
 
-    [["gmsh4.6.0".download]]
-    sha256 = "0de0c9741cd5dbbf6becd7de60ff446f344f763567146227c7e4c5648a2a8609"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64-sdk.tgz"
+    [["gmsh4.7.0".download]]
+    sha256 = "75f659d8f3af4d60617f6c1f423ac34e473da586511c8be3f9b7e1cd0f1c8bee"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux64-sdk.tgz"
+[["gmsh4.7.0"]]
+arch = "x86_64"
+git-tree-sha1 = "6aa9ca1a8c1fdaad93eb862369e7c8f59e2c863a"
+lazy = true
+libc = "glibc"
+os = "linux"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "75f659d8f3af4d60617f6c1f423ac34e473da586511c8be3f9b7e1cd0f1c8bee"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux64-sdk.tgz"
+[["gmsh4.7.0"]]
+arch = "armv7l"
+git-tree-sha1 = "6891fcedf84b53130327a3a85982b82660265629"
+lazy = true
+libc = "musl"
+os = "linux"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "28e437c038d5e9da76c51281f261e4c789e154fa56aeee1bf3beac018622b849"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux32-sdk.tgz"
+[["gmsh4.7.0"]]
+arch = "x86_64"
+git-tree-sha1 = "2d706c82f95ed9ae98972df24edf4ea8d2eaf7fc"
+lazy = true
+os = "windows"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "bda3a32a12959a0d098af9afe6e60f804a9bcb1f5db0c8a6e7fc4e71e9830658"
+    url = "https://gmsh.info/bin/Windows/gmsh-4.7.0-Windows64-sdk.zip"
+[["gmsh4.7.0"]]
+arch = "i686"
+git-tree-sha1 = "6891fcedf84b53130327a3a85982b82660265629"
+lazy = true
+libc = "musl"
+os = "linux"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "28e437c038d5e9da76c51281f261e4c789e154fa56aeee1bf3beac018622b849"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux32-sdk.tgz"
+[["gmsh4.7.0"]]
+arch = "i686"
+git-tree-sha1 = "e0215d353cc4c5fb0f362f1862ed04b9d17deb26"
+lazy = true
+os = "windows"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "84d6f04a260edb6808794fffe4aa145e58d23ea20f1f3ce0f5d0b7850b0c7847"
+    url = "https://gmsh.info/bin/Windows/gmsh-4.7.0-Windows32-sdk.zip"
+[["gmsh4.7.0"]]
+arch = "aarch64"
+git-tree-sha1 = "6aa9ca1a8c1fdaad93eb862369e7c8f59e2c863a"
+lazy = true
+libc = "glibc"
+os = "linux"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "75f659d8f3af4d60617f6c1f423ac34e473da586511c8be3f9b7e1cd0f1c8bee"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux64-sdk.tgz"
+[["gmsh4.7.0"]]
+arch = "aarch64"
+git-tree-sha1 = "6aa9ca1a8c1fdaad93eb862369e7c8f59e2c863a"
+lazy = true
+libc = "musl"
+os = "linux"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "75f659d8f3af4d60617f6c1f423ac34e473da586511c8be3f9b7e1cd0f1c8bee"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.7.0-Linux64-sdk.tgz"
+[["gmsh4.7.0"]]
+arch = "x86_64"
+git-tree-sha1 = "cc3e9eb338d88b36efa7a56ecf35fb83e2f87ddc"
+lazy = true
+os = "macos"
+
+    [["gmsh4.7.0".download]]
+    sha256 = "c071cf917f5f006262bfbb3bf7afc30c9501b8d4d3d1ea6703ea01e7ab8a529d"
+    url = "https://gmsh.info/bin/MacOSX/gmsh-4.7.0-MacOSX-sdk.tgz"

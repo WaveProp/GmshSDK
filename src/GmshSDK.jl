@@ -2,9 +2,9 @@ module GmshSDK
 
 using Pkg.Artifacts
 
-const version = "4.6.0"
+const version = "4.7.0"
 
-const gmsh_path = artifact"gmsh4.6.0"
+const gmsh_path = artifact"gmsh4.7.0"
 
 const dirs      = readdir(gmsh_path,join=true)
 
