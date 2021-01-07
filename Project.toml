@@ -1,7 +1,7 @@
 name = "GmshSDK"
 uuid = "357176ee-4fc2-4a7a-b2e3-8358239da070"
 authors = ["Luiz M. Faria <maltezfaria@gmail.com>"]
-version = "0.1.0"
+version = "4.7.0" # same as gmsh version
 
 [deps]
 ArtifactUtils = "8b73e784-e7d8-4ea5-973d-377fed4e3bce"
