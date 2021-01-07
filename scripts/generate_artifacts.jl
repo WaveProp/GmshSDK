@@ -1,4 +1,6 @@
-# This script automates the genenration of the Artifacts.toml file given a version of gmsh. 
+# This script automates the genenration of the Artifacts.toml file given a
+# version of gmsh. It is essentially run once per release when the gmsh version
+# is updated.
 
 using ArtifactUtils, Pkg.Artifacts
 using Pkg.BinaryPlatforms: Linux, MacOS, Windows, FreeBSD
@@ -44,7 +46,6 @@ artifact_name = "gmsh$version"
 for (platform,dist) in platform_to_dist
     url                  = dist_to_url[dist]
     add_artifact!(artifact_toml,artifact_name,url;clear=true,platform=platform,force=true,lazy=true)
-    # Artifacts.bind_artifact!(artifact_toml,artifact_name,Base.SHA1(sha1_str),platform=platform,download_info=download_info,force=true,lazy=true)
 end 
 
 
