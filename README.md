@@ -12,7 +12,11 @@ pkg> add GmshSDK
 
 ## Usage
 
-This package provides in its `Artifacts.toml` the information required to download a given version of *Gmsh Software Development Toolkit*. It then exports the *gmsh* module so that you can interact with the Gmsh API. Basic usage:
+This package provides in its `Artifacts.toml` the information required to
+download a given version of *Gmsh Software Development Toolkit*. It then exports
+the *gmsh* module so that you can interact with the Gmsh API. In summary, it is
+just a convenience tool for interacting with the *Julia API* from *Gmsh*, and
+all credits go to the *gmsh* developers. Basic usage:
 
 ```julia
 using GmshSDK
@@ -21,4 +25,5 @@ gmsh.initialize()
 gmsh.finalize()
 ```
 
-See the [api manual](https://gmsh.info/doc/texinfo/gmsh.html#Gmsh-API) for more information on what you can with `gmsh`.
+See the [gmsh api manual](https://gmsh.info/doc/texinfo/gmsh.html#Gmsh-API) for more
+information on what you can with `gmsh`.
