@@ -2,7 +2,7 @@
 *Julia artifacts for [Gmsh Software Development
 Kit](https://gmsh.info/#Download)*
 
-![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://WaveProp.github.io/GmshSDK/stable)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://WaveProp.github.io/GmshSDK/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://WaveProp.github.io/GmshSDK/dev)
 [![Build
 Status](https://github.com/WaveProp/GmshSDK/workflows/CI/badge.svg)](https://github.com/WaveProp/GmshSDK/actions)
