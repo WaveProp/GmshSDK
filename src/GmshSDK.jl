@@ -1,8 +1,10 @@
 module GmshSDK
 
 using Pkg.Artifacts
-
-const version = "4.7.0"
+using WavePropBase
+using StaticArrays
+using RecipesBase
+using Printf
 
 const gmsh_path = artifact"gmsh4.7.0"
 
@@ -12,6 +14,12 @@ const dirs      = readdir(gmsh_path,join=true)
 
 include(joinpath(first(dirs),"lib","gmsh.jl"))
 
-export gmsh
+include("gmshIO.jl")
+
+export
+    # macros
+    @gmsh,
+    # methods
+    gmsh
 
 end # module
