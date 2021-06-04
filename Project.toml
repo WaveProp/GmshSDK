@@ -1,14 +1,16 @@
 name = "GmshSDK"
 uuid = "357176ee-4fc2-4a7a-b2e3-8358239da070"
 authors = ["Luiz M. Faria <maltezfaria@gmail.com>"]
-version = "4.7.0" # same as gmsh version
+version = "4.7.0"
 
 [deps]
-ArtifactUtils = "8b73e784-e7d8-4ea5-973d-377fed4e3bce"
 Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+RecipesBase = "3cdcf5f2-1ef4-517c-9805-6587b60abb01"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+WavePropBase = "91c5bd54-65f5-4719-ae3b-9579edfc4a0b"
 
 [compat]
-ArtifactUtils = "0.1.0" 
 julia = ">= 1.3"
