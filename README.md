@@ -1,22 +1,26 @@
 # GmshSDK.jl
-*Julia artifacts for [Gmsh Software Development Kit](https://gmsh.info/#Download)*
+*Julia artifacts for [Gmsh Software Development
+Kit](https://gmsh.info/#Download)*
 
-![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
-![CI](https://github.com/WaveProp/GmshSDK/workflows/CI/badge.svg?branch=main)
+![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://WaveProp.github.io/GmshSDK/stable)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://WaveProp.github.io/GmshSDK/dev)
+[![Build
+Status](https://github.com/WaveProp/GmshSDK/workflows/CI/badge.svg)](https://github.com/WaveProp/GmshSDK/actions)
+[![codecov](https://codecov.io/gh/WaveProp/GmshSDK/branch/main/graph/badge.svg?token=codJo03vp6)](https://codecov.io/gh/WaveProp/GmshSDK)
+
 
 ## Installation
 Install from the Pkg REPL:
 ```
-pkg> add GmshSDK
+pkg> add https://github.com/WaveProp/GmshSDK
 ```
 
 ## Usage
 
 This package provides in its `Artifacts.toml` the information required to
 download a given version of *Gmsh Software Development Toolkit*. It then exports
-the *gmsh* module so that you can interact with the Gmsh API. In summary, it is
-just a convenience tool for interacting with the *Julia API* from *Gmsh*, and
-all credits go to the *gmsh* developers. Basic usage:
+the *gmsh* module so that you can interact with the Gmsh API. It also provides
+basic functionality for integrating with the mesh format in `WavePropBase`.
 
 ```julia
 using GmshSDK
