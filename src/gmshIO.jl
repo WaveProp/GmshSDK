@@ -8,6 +8,7 @@ macro gmsh(ex)
     return quote
         gmsh.initialize()
         try
+            _set_verbosity(0)
             $(esc(ex))
         finally
             # make sure we finalize gmsh if something goes wrong
@@ -24,17 +25,18 @@ Read a `.geo` file and generate a [`GenericMesh`](@ref) together with a
 """
 function read_geo(fname;dim=3,h=nothing,order=nothing)
     assert_extension(fname, ".geo")
-    gmsh.initialize()
-    gmsh.open(fname)
-    h     === nothing || _set_meshsize(h)
-    order === nothing || _set_meshorder(order)
-    gmsh.model.mesh.generate(dim)
-    Ω = _initialize_domain(dim)
-    M = _initialize_mesh(Ω)
-    if dim == 2
-        M = convert_to_2d(M)
+    Ω,M = @gmsh begin
+        gmsh.open(fname)
+        h     === nothing || _gmsh_set_meshsize(h)
+        order === nothing || _gmsh_set_meshorder(order)
+        gmsh.model.mesh.generate(dim)
+        Ω = _initialize_domain(dim)
+        M = _initialize_mesh(Ω)
+        if dim == 2
+            M = convert_to_2d(M)
+        end
+        Ω,M
     end
-    gmsh.finalize()
     return Ω,M
 end
 
@@ -46,12 +48,13 @@ instead of generated.
 """
 function read_msh(fname;dim=3)
     assert_extension(fname, ".msh")
-    gmsh.initialize()
-    gmsh.open(fname)
-    Ω = _initialize_domain(dim)
-    M = _initialize_mesh(Ω)
-    gmsh.finalize()
-    return Ω, M
+    Ω,M = @gmsh begin
+        gmsh.open(fname)
+        Ω = _initialize_domain(dim)
+        M = _initialize_mesh(Ω)
+        Ω, M
+    end
+    return Ω,M
 end
 
 """
@@ -114,9 +117,9 @@ function _initialize_mesh(Ω::Domain)
     # map gmsh type tags to actual internal types
     etypes = [_type_tag_to_etype(e) for e in gmsh.model.mesh.getElementTypes()]
     # Recursively populating the dictionaries
-    elements = Dict{DataType,Matrix{Int}}()
-    ent2tags = Dict{AbstractEntity,Dict{DataType,Vector{Int}}}()
-    elements, ent2tag = _domain_to_mesh!(elements, ent2tags, Ω)
+    elements = OrderedDict{DataType,Matrix{Int}}()
+    ent2tags = OrderedDict{AbstractEntity,OrderedDict{DataType,Vector{Int}}}()
+    elements, _ = _domain_to_mesh!(elements, ent2tags, Ω)
     return GenericMesh{3,Float64}(;nodes, elements, ent2tags)
 end
 
@@ -150,7 +153,7 @@ where:
 """
 function _ent_to_mesh!(elements, ent2tag, ω::ElementaryEntity)
     ω in keys(ent2tag) && (return elements, ent2tag)
-    etypes_to_etags = Dict{DataType,Vector{Int}}()
+    etypes_to_etags = OrderedDict{DataType,Vector{Int}}()
     # Loop on GMSH element types (integer)
     type_tags, _, ntagss = gmsh.model.mesh.getElements(geometric_dimension(ω),tag(ω))
     for (type_tag, ntags) in zip(type_tags, ntagss)
@@ -177,16 +180,17 @@ Use `gmsh` API to generate a disk and return a [`Domain`](@ref) `Ω` and a
 [`GenericMesh`](@ref) of the disk.
 """
 function disk(;rx=0.5,ry=0.5,center=(0.,0.,0.),dim=2,h=min(rx,ry)/10,order=1)
-    gmsh.initialize()
-    _set_meshsize(h)
-    _set_meshorder(order)
-    gmsh.model.occ.addDisk(center...,rx,ry)
-    gmsh.model.occ.synchronize()
-    gmsh.model.mesh.generate(dim)
-    Ω = _initialize_domain(2)
-    M = _initialize_mesh(Ω)
-    M = convert_to_2d(M)
-    gmsh.finalize()
+    Ω,M = @gmsh begin
+        _gmsh_set_meshsize(h)
+        _gmsh_set_meshorder(order)
+        gmsh.model.occ.addDisk(center...,rx,ry)
+        gmsh.model.occ.synchronize()
+        gmsh.model.mesh.generate(dim)
+        Ω = _initialize_domain(2)
+        M = _initialize_mesh(Ω)
+        M = convert_to_2d(M)
+        Ω,M
+    end
     return Ω,M
 end
 
@@ -197,7 +201,7 @@ Use `gmsh` API to generate a sphere and return `Ω::Domain` and `M::GenericMesh`
 Only entities of dimension `≤ dim` are meshed.
 """
 function sphere(;radius=0.5,center=(0., 0., 0.),dim=3,h=radius/10,order=1,recombine=false)
-    @gmsh begin
+    Ω,M = @gmsh begin
         _set_meshsize(h)
         _set_meshorder(order)
         gmsh.model.occ.addSphere(center..., radius)
@@ -206,8 +210,9 @@ function sphere(;radius=0.5,center=(0., 0., 0.),dim=3,h=radius/10,order=1,recomb
         recombine && gmsh.model.mesh.recombine()
         Ω = _initialize_domain(3)
         M = _initialize_mesh(Ω)
-        return Ω, M
+        Ω, M
     end
+    return Ω,M
 end
 
 """
@@ -286,19 +291,19 @@ Mapping of `gmsh` element types, encoded as an integer, to the internal
 equivalent of those. This function assumes `gmsh` has been initilized.
 """
 function _type_tag_to_etype(tag)
-    T = Float64
+    T = SVector{3,Float64} # point type
     name,dim,order,num_nodes,ref_nodes,num_primary_nodes  = gmsh.model.mesh.getElementProperties(tag)
     num_nodes = Int(num_nodes) #convert to Int64
     if occursin("Point",name)
-        etype = SVector{3,T}
+        etype = LagrangePoint{1,T}
     elseif occursin("Line",name)
-    etype = LagrangeLine{num_nodes,SVector{3,T}}
+    etype = LagrangeLine{num_nodes,T}
     elseif occursin("Triangle",name)
-        etype = LagrangeTriangle{num_nodes,SVector{3,T}}
+        etype = LagrangeTriangle{num_nodes,T}
     elseif occursin("Quadrilateral",name)
-        etype = LagrangeRectangle{num_nodes,SVector{3,T}}
+        etype = LagrangeSquare{num_nodes,T}
     elseif occursin("Tetrahedron",name)
-        etype = LagrangeTetrahedron{num_nodes,SVector{3,T}}
+        etype = LagrangeTetrahedron{num_nodes,T}
     else
         error("gmsh element of family $name does not an internal equivalent")
     end

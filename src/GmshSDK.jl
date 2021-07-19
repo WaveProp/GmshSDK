@@ -1,10 +1,15 @@
 module GmshSDK
 
 using Pkg.Artifacts
-using WavePropBase
 using StaticArrays
 using RecipesBase
+using OrderedCollections
 using Printf
+
+using WavePropBase
+using WavePropBase.Geometry
+using WavePropBase.Interpolation
+using WavePropBase.Mesh
 
 const gmsh_path = artifact"gmsh4.7.0"
 
