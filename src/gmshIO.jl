@@ -27,8 +27,8 @@ function read_geo(fname;dim=3,h=nothing,order=nothing)
     assert_extension(fname, ".geo")
     Ω,M = @gmsh begin
         gmsh.open(fname)
-        h     === nothing || _gmsh_set_meshsize(h)
-        order === nothing || _gmsh_set_meshorder(order)
+        h     === nothing || _set_meshsize(h)
+        order === nothing || _set_meshorder(order)
         gmsh.model.mesh.generate(dim)
         Ω = _initialize_domain(dim)
         M = _initialize_mesh(Ω)
@@ -70,12 +70,12 @@ function _initialize_domain(dim)
     Ω = Domain() # Create empty domain
     dim_tags = gmsh.model.getEntities(dim)
     for (_, tag) in dim_tags
-        if haskey(ENTITIES,(dim,tag))
-            ent = ENTITIES[(dim,tag)]
-        else
-            ent = ElementaryEntity(dim, tag)
-            _fill_entity_boundary!(ent)
-        end
+        # if haskey(ENTITIES,(dim,tag))
+        #     ent = ENTITIES[(dim,tag)]
+        # else
+        ent = ElementaryEntity(dim, tag)
+        _fill_entity_boundary!(ent)
+        # end
         push!(Ω, ent)
     end
     return Ω
@@ -181,8 +181,8 @@ Use `gmsh` API to generate a disk and return a [`Domain`](@ref) `Ω` and a
 """
 function disk(;rx=0.5,ry=0.5,center=(0.,0.,0.),dim=2,h=min(rx,ry)/10,order=1)
     Ω,M = @gmsh begin
-        _gmsh_set_meshsize(h)
-        _gmsh_set_meshorder(order)
+        _set_meshsize(h)
+        _set_meshorder(order)
         gmsh.model.occ.addDisk(center...,rx,ry)
         gmsh.model.occ.synchronize()
         gmsh.model.mesh.generate(dim)

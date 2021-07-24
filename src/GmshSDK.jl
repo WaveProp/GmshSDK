@@ -24,7 +24,10 @@ include("gmshIO.jl")
 export
     # macros
     @gmsh,
+    # types
+    ElementIterator,
     # methods
-    gmsh
+    gmsh,
+    clear_entities!
 
 end # module
