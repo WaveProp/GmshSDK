@@ -11,8 +11,9 @@ jobs:
       matrix:
         version:
           - '1.6'
+          - 'nightly'
         os:
-          - ubuntu-20.04
+          - ubuntu-latest
           - macos-latest
           - windows-latest
         arch:
