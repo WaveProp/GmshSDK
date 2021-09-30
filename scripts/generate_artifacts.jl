@@ -50,5 +50,5 @@ artifact_name = "gmsh$version"
 
 for (platform,dist) in platform_to_dist
     url                  = dist_to_url[dist]
-    add_artifact!(artifact_toml,artifact_name,url;clear=true,platform=platform,force=true,lazy=true)
+    add_artifact!(artifact_toml,artifact_name,url;clear=true,platform=platform,force=true,lazy=false)
 end

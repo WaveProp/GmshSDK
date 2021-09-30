@@ -1,9 +1,15 @@
 [["gmsh4.8.4"]]
-arch = "armv7l"
-call_abi = "eabihf"
+arch = "i686"
+git-tree-sha1 = "460507f80f9c368a0e82235d953fa768df57be1c"
+os = "windows"
+
+    [["gmsh4.8.4".download]]
+    sha256 = "59d528d4ec3f8984dbc7d1306f1ce4f402125ac45c8991d998834578f9d720cd"
+    url = "https://github.com/WaveProp/.github/raw/main/gmsh-4.8.4-Windows32-sdk.tgz"
+[["gmsh4.8.4"]]
+arch = "i686"
 git-tree-sha1 = "f708f8de90b3a9d7e4816a3795ce65db877eeaa0"
-lazy = true
-libc = "glibc"
+libc = "musl"
 os = "linux"
 
     [["gmsh4.8.4".download]]
@@ -12,7 +18,6 @@ os = "linux"
 [["gmsh4.8.4"]]
 arch = "aarch64"
 git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
-lazy = true
 libc = "glibc"
 os = "linux"
 
@@ -20,29 +25,16 @@ os = "linux"
     sha256 = "ca2726da474b7299512ca8c9c42fd1f9b7694a7a664c3a612855592dc82e0c1d"
     url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux64-sdk.tgz"
 [["gmsh4.8.4"]]
-arch = "i686"
-git-tree-sha1 = "f708f8de90b3a9d7e4816a3795ce65db877eeaa0"
-lazy = true
-libc = "glibc"
-os = "linux"
+arch = "x86_64"
+git-tree-sha1 = "4fc62622540a5fe326b0d903833af5b53d2e6c36"
+os = "macos"
 
     [["gmsh4.8.4".download]]
-    sha256 = "7f4b5b97844bcb14a06e71936c81f2f5387562aa1793c419fe3b208024944709"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux32-sdk.tgz"
-[["gmsh4.8.4"]]
-arch = "i686"
-git-tree-sha1 = "f708f8de90b3a9d7e4816a3795ce65db877eeaa0"
-lazy = true
-libc = "musl"
-os = "linux"
-
-    [["gmsh4.8.4".download]]
-    sha256 = "7f4b5b97844bcb14a06e71936c81f2f5387562aa1793c419fe3b208024944709"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux32-sdk.tgz"
+    sha256 = "c50fa22bb53bc53cc1096347bec68d6280e4a832f4a5c2f4916f78d8257cd144"
+    url = "https://gmsh.info/bin/MacOSX/gmsh-4.8.4-MacOSX-sdk.tgz"
 [["gmsh4.8.4"]]
 arch = "x86_64"
 git-tree-sha1 = "0401cda36409cac9a4a43d2178708823359fab32"
-lazy = true
 os = "windows"
 
     [["gmsh4.8.4".download]]
@@ -50,17 +42,16 @@ os = "windows"
     url = "https://github.com/WaveProp/.github/raw/main/gmsh-4.8.4-Windows64-sdk.tgz"
 [["gmsh4.8.4"]]
 arch = "i686"
-git-tree-sha1 = "460507f80f9c368a0e82235d953fa768df57be1c"
-lazy = true
-os = "windows"
+git-tree-sha1 = "f708f8de90b3a9d7e4816a3795ce65db877eeaa0"
+libc = "glibc"
+os = "linux"
 
     [["gmsh4.8.4".download]]
-    sha256 = "59d528d4ec3f8984dbc7d1306f1ce4f402125ac45c8991d998834578f9d720cd"
-    url = "https://github.com/WaveProp/.github/raw/main/gmsh-4.8.4-Windows32-sdk.tgz"
+    sha256 = "7f4b5b97844bcb14a06e71936c81f2f5387562aa1793c419fe3b208024944709"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux32-sdk.tgz"
 [["gmsh4.8.4"]]
 arch = "x86_64"
 git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
-lazy = true
 os = "freebsd"
 
     [["gmsh4.8.4".download]]
@@ -70,8 +61,35 @@ os = "freebsd"
 arch = "armv7l"
 call_abi = "eabihf"
 git-tree-sha1 = "f708f8de90b3a9d7e4816a3795ce65db877eeaa0"
-lazy = true
 libc = "musl"
+os = "linux"
+
+    [["gmsh4.8.4".download]]
+    sha256 = "7f4b5b97844bcb14a06e71936c81f2f5387562aa1793c419fe3b208024944709"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux32-sdk.tgz"
+[["gmsh4.8.4"]]
+arch = "aarch64"
+git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
+libc = "musl"
+os = "linux"
+
+    [["gmsh4.8.4".download]]
+    sha256 = "ca2726da474b7299512ca8c9c42fd1f9b7694a7a664c3a612855592dc82e0c1d"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux64-sdk.tgz"
+[["gmsh4.8.4"]]
+arch = "powerpc64le"
+git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
+libc = "glibc"
+os = "linux"
+
+    [["gmsh4.8.4".download]]
+    sha256 = "ca2726da474b7299512ca8c9c42fd1f9b7694a7a664c3a612855592dc82e0c1d"
+    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux64-sdk.tgz"
+[["gmsh4.8.4"]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "f708f8de90b3a9d7e4816a3795ce65db877eeaa0"
+libc = "glibc"
 os = "linux"
 
     [["gmsh4.8.4".download]]
@@ -80,37 +98,7 @@ os = "linux"
 [["gmsh4.8.4"]]
 arch = "x86_64"
 git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
-lazy = true
-libc = "musl"
-os = "linux"
-
-    [["gmsh4.8.4".download]]
-    sha256 = "ca2726da474b7299512ca8c9c42fd1f9b7694a7a664c3a612855592dc82e0c1d"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux64-sdk.tgz"
-[["gmsh4.8.4"]]
-arch = "x86_64"
-git-tree-sha1 = "4fc62622540a5fe326b0d903833af5b53d2e6c36"
-lazy = true
-os = "macos"
-
-    [["gmsh4.8.4".download]]
-    sha256 = "c50fa22bb53bc53cc1096347bec68d6280e4a832f4a5c2f4916f78d8257cd144"
-    url = "https://gmsh.info/bin/MacOSX/gmsh-4.8.4-MacOSX-sdk.tgz"
-[["gmsh4.8.4"]]
-arch = "powerpc64le"
-git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
-lazy = true
 libc = "glibc"
-os = "linux"
-
-    [["gmsh4.8.4".download]]
-    sha256 = "ca2726da474b7299512ca8c9c42fd1f9b7694a7a664c3a612855592dc82e0c1d"
-    url = "https://gmsh.info/bin/Linux/gmsh-4.8.4-Linux64-sdk.tgz"
-[["gmsh4.8.4"]]
-arch = "aarch64"
-git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
-lazy = true
-libc = "musl"
 os = "linux"
 
     [["gmsh4.8.4".download]]
@@ -119,8 +107,7 @@ os = "linux"
 [["gmsh4.8.4"]]
 arch = "x86_64"
 git-tree-sha1 = "aac2edd3b8db730080c79f933d43aa3f327be646"
-lazy = true
-libc = "glibc"
+libc = "musl"
 os = "linux"
 
     [["gmsh4.8.4".download]]
