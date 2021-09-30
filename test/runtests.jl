@@ -14,13 +14,13 @@ using GmshSDK
 end
 
 @testset "IO" begin
-    GmshSDK.clear_entities!()
+    Geometry.clear_entities!()
     Ω,M = GmshSDK.sphere(;h=0.5)
     for E in keys(M)
-        for el in ElementIterator(M,E)
+        for el in Mesh.ElementIterator(M,E)
             el.vals
         end
     end
-    Γ_mesh = view(M,GmshSDK.external_boundary(Ω))
+    Γ_mesh = view(M,Geometry.external_boundary(Ω))
     @test true == true #
 end

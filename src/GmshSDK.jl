@@ -1,6 +1,6 @@
 module GmshSDK
 
-using Pkg.Artifacts
+using Artifacts
 using StaticArrays
 using RecipesBase
 using OrderedCollections
@@ -11,7 +11,9 @@ using WavePropBase.Geometry
 using WavePropBase.Interpolation
 using WavePropBase.Mesh
 
-const gmsh_path = artifact"gmsh4.7.0"
+const version   = "4.8.4"
+
+const gmsh_path = artifact"gmsh4.8.4"
 
 const dirs      = readdir(gmsh_path,join=true)
 
@@ -22,12 +24,12 @@ include(joinpath(first(dirs),"lib","gmsh.jl"))
 include("gmshIO.jl")
 
 export
+    # re-export useful modules from WavePropBase
+    Geometry,
+    Mesh,
     # macros
     @gmsh,
-    # types
-    ElementIterator,
     # methods
-    gmsh,
-    clear_entities!
+    gmsh
 
 end # module
