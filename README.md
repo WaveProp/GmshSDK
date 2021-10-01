@@ -18,9 +18,11 @@ pkg> add https://github.com/WaveProp/GmshSDK
 ## Usage
 
 This package provides in its `Artifacts.toml` the information required to
-download a given version of *Gmsh Software Development Toolkit*. It then exports
-the *gmsh* module so that you can interact with the Gmsh API. It also provides
-basic functionality for integrating with the mesh format in `WavePropBase`.
+download and use the *Gmsh Software Development Toolkit*, as well as some
+convenience functions to interface meshes and domains created by *Gmsh* with
+solvers in the [WaveProp](https://github.com/WaveProp) organization.
+
+To simply use the `Gmsh` API, you can do the following:
 
 ```julia
 using GmshSDK
@@ -28,6 +30,44 @@ gmsh.initialize()
 # do gmsh-fu
 gmsh.finalize()
 ```
+where *gmsh-foo* stands for anything described on the official [gmsh api
+    manual](https://gmsh.info/doc/texinfo/gmsh.html#Gmsh-API).
 
-See the [gmsh api manual](https://gmsh.info/doc/texinfo/gmsh.html#Gmsh-API) for more
-information on what you can with `gmsh`.
+As mentioned, the package also provides some convenience functions for
+converting meshes and/or domains created in *Gmsh* to internal representations
+defined in `WavePropBase` organization. An example of a convenience wrapper would
+be:
+
+```julia
+using GmshSDK, Plots
+Ω,M = GmshSDK.sphere() # create and mesh a unit sphere
+Γ   = Geometry.boundary(Ω) # extract the boundary
+plot(view(M,Γ)) # plot the elements of the mesh on Γ
+```
+
+For more information, see the documentation for the functions in the
+`src/gmshIO.jl` file and the `Geometry` and `Mesh` modules on [`WavePropBase`](https://github.com/WaveProp/WavePropBase).
+
+
+## Version and Artifact generation
+
+The version of `gmsh` used is stored in the `GmshSDK.GMSH_VERSION` variable. You
+can also query the *Gmsh* version through `gmsh.GMSH_API_VERSION`,
+`gmsh.GMSH.API_VERSION_MAJOR`, and `gmsh.GMSH_API_VERSION_MINOR`. If you need a
+specific version of *Gmsh*, you can run `scripts/generate_artifacts.jl` to
+create your own `Artifacts.toml` file locally.
+
+## Related packages
+
+If you simply need a wrapper for the *Gmsh* api, see also:
+
+- [Gmsh.jl](https://github.com/JuliaFEM/Gmsh.jl)
+- [GmshTools.jl](https://github.com/shipengcheng1230/GmshTools.jl)
+
+
+## Issues
+
+Please [file an issue](https://github.com/WaveProp/GmshSDK/issues) if you run
+into a problem when trying to install this package.
+
+
