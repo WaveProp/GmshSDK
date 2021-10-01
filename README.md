@@ -30,13 +30,13 @@ gmsh.initialize()
 # do gmsh-fu
 gmsh.finalize()
 ```
-where *gmsh-foo* stands for anything described on the official [gmsh api
+where *gmsh-fu* stands for anything described on the official [gmsh api
     manual](https://gmsh.info/doc/texinfo/gmsh.html#Gmsh-API).
 
 As mentioned, the package also provides some convenience functions for
 converting meshes and/or domains created in *Gmsh* to internal representations
-defined in `WavePropBase` organization. An example of a convenience wrapper would
-be:
+defined in [`WavePropBase`](https://github.com/WaveProp/WavePropBase). An
+example of such a usage would be:
 
 ```julia
 using GmshSDK, Plots
