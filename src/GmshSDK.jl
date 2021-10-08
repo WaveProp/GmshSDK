@@ -24,12 +24,12 @@ include(joinpath(first(dirs),"lib","gmsh.jl"))
 include("gmshIO.jl")
 
 export
+    gmsh,
     # re-export useful modules from WavePropBase
     Geometry,
     Mesh,
     # macros
-    @gmsh,
+    @gmsh
     # methods
-    gmsh
 
 end # module
