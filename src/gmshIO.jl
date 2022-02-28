@@ -111,13 +111,19 @@ end
 
 Read a `.geo` file and generate a [`Domain`](@ref) with all entities of
 dimension `dim`.
+
+!!! danger
+    This function assumes that `gmsh` has been initialized, and does not handle its
+    finalization.
 """
 function read_geo(fname;dim=3)
     Ω = Domain() # Create empty domain
-    @gmsh begin
+    try
         gmsh.open(fname)
-        domain!(Ω;dim)
+    catch
+        @error "could not open $fname"
     end
+    domain!(Ω;dim)
     return Ω
 end
 
@@ -126,14 +132,20 @@ end
 
 Read `fname` and create a `Domain` and a `GenericMesh` structure with all
 entities in `Ω` of dimension `dim`.
+
+!!! danger
+    This function assumes that `gmsh` has been initialized, and does not handle its
+    finalization.
 """
 function read_msh(fname;dim=3)
     Ω = Domain()
-    msh = @gmsh begin
+    try
         gmsh.open(fname)
-        Ω = domain(;dim)
-        meshgen(Ω;dim)
+    catch
+        @error "could not open $fname"
     end
+    Ω = domain(;dim)
+    meshgen(Ω;dim)
     return Ω,msh
 end
 
@@ -255,7 +267,7 @@ function _type_tag_to_etype(tag)
     name,dim,order,num_nodes,ref_nodes,num_primary_nodes  = gmsh.model.mesh.getElementProperties(tag)
     num_nodes = Int(num_nodes) #convert to Int64
     if occursin("Point",name)
-        etype = Point3D
+        etype = LagrangePoint{3,Float64}
     elseif occursin("Line",name)
     etype = LagrangeLine{num_nodes,T}
     elseif occursin("Triangle",name)
