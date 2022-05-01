@@ -28,7 +28,7 @@ dimension `dim`.
     does not handle its finalization.
 """
 function domain(;dim=3)
-    Ω = Domain() # Create empty domain
+    Ω = WPB.Domain() # Create empty domain
     domain!(Ω;dim)
     return Ω
 end
@@ -43,7 +43,7 @@ creating a new domain.
     This function assumes that `gmsh` has been initialized, and does not handle its
     finalization.
 """
-function domain!(Ω::Domain;dim=3)
+function domain!(Ω::WPB.Domain;dim=3)
     dim_tags = gmsh.model.getEntities(dim)
     for (_, tag) in dim_tags
         # FIXME: create a temporary GMSH_TAGS to first import all tags from
@@ -51,7 +51,7 @@ function domain!(Ω::Domain;dim=3)
         # if haskey(ENTITIES,(dim,tag))
         #     ent = ENTITIES[(dim,tag)]
         # else
-        ent = ElementaryEntity(dim, tag)
+        ent = WPB.ElementaryEntity(dim, tag)
         _fill_entity_boundary!(ent)
         # end
         push!(Ω, ent)
@@ -70,13 +70,13 @@ into the `x,y` plane.
     This function assumes that `gmsh` has been initialized, and does not handle its
     finalization.
 """
-function meshgen(Ω::Domain;dim=3)
-    msh = GenericMesh{3,Float64}()
+function meshgen(Ω::WPB.Domain;dim=3)
+    msh = WPB.GenericMesh{3,Float64}()
     meshgen!(msh,Ω)
     if dim == 3
         return msh
     elseif dim == 2
-        return convert_to_2d(msh)
+        return WPB.convert_to_2d(msh)
         # return msh
     else
         error("`dim` value must be `2` or `3`")
@@ -93,14 +93,14 @@ creating a new mesh.
     This function assumes that `gmsh` has been initialized, and does not handle its
     finalization.
 """
-function meshgen!(msh::GenericMesh,Ω::Domain)
+function meshgen!(msh::WPB.GenericMesh,Ω::WPB.Domain)
     tags, coord, _ = gmsh.model.mesh.getNodes()
     # NOTE: maybe use something like "unsafe_convert" to avoid having to
     # allocate new points for the nodes?
     nodes = reinterpret(SVector{3,Float64}, coord) |> collect
     append!(msh.nodes,nodes)
-    els = Mesh.elements(msh)
-    e2t = ent2tags(msh)
+    els = WPB.elements(msh)
+    e2t = WPB.ent2tags(msh)
     # Recursively populate the dictionaries
     _domain_to_mesh!(els, e2t, Ω)
     return msh
@@ -117,7 +117,7 @@ dimension `dim`.
     finalization.
 """
 function read_geo(fname;dim=3)
-    Ω = Domain() # Create empty domain
+    Ω = WPB.Domain() # Create empty domain
     try
         gmsh.open(fname)
     catch
@@ -138,14 +138,14 @@ entities in `Ω` of dimension `dim`.
     finalization.
 """
 function read_msh(fname;dim=3)
-    Ω = Domain()
+    Ω = WPB.Domain()
     try
         gmsh.open(fname)
     catch
         @error "could not open $fname"
     end
     Ω = domain(;dim)
-    meshgen(Ω;dim)
+    msh = meshgen(Ω;dim)
     return Ω,msh
 end
 
@@ -161,10 +161,10 @@ function _fill_entity_boundary!(ent)
     oriented = false
     dim_tags = gmsh.model.getBoundary((ent.dim, ent.tag),combine,oriented)
     for (d, t) in dim_tags
-        if haskey(ENTITIES,(d,t))
-            bnd = ENTITIES[(d,t)]
+        if haskey(WPB.ENTITIES,(d,t))
+            bnd = WPB.ENTITIES[(d,t)]
         else
-            bnd = ElementaryEntity(d, t)
+            bnd = WPB.ElementaryEntity(d, t)
             _fill_entity_boundary!(bnd)
         end
         push!(ent.boundary, bnd)
@@ -177,12 +177,12 @@ end
 
 Recursively populating the dictionaries `elements` and `ent2tag`.
 """
-function _domain_to_mesh!(elements, ent2tag, Ω::Domain)
+function _domain_to_mesh!(elements, ent2tag, Ω::WPB.Domain)
     isempty(Ω) && (return elements, ent2tag)
     for ω in Ω
         _ent_to_mesh!(elements, ent2tag, ω)
     end
-    Γ = skeleton(Ω)
+    Γ = WPB.skeleton(Ω)
     _domain_to_mesh!(elements, ent2tag, Γ)
 end
 
@@ -200,11 +200,11 @@ where:
     elements;
 - `etags::Vector{Int}` gives the indices of those elements in `elements`.
 """
-function _ent_to_mesh!(elements, ent2tag, ω::ElementaryEntity)
+function _ent_to_mesh!(elements, ent2tag, ω::WPB.ElementaryEntity)
     ω in keys(ent2tag) && (return elements, ent2tag)
-    etypes_to_etags = OrderedDict{DataType,Vector{Int}}()
+    etypes_to_etags = Dict{DataType,Vector{Int}}()
     # Loop on GMSH element types (integer)
-    type_tags, _, ntagss = gmsh.model.mesh.getElements(geometric_dimension(ω),tag(ω))
+    type_tags, _, ntagss = gmsh.model.mesh.getElements(WPB.geometric_dimension(ω),WPB.tag(ω))
     for (type_tag, ntags) in zip(type_tags, ntagss)
         _, _, _, Np, _ = gmsh.model.mesh.getElementProperties(type_tag)
         ntags = reshape(ntags, Int(Np), :)
@@ -267,15 +267,15 @@ function _type_tag_to_etype(tag)
     name,dim,order,num_nodes,ref_nodes,num_primary_nodes  = gmsh.model.mesh.getElementProperties(tag)
     num_nodes = Int(num_nodes) #convert to Int64
     if occursin("Point",name)
-        etype = LagrangePoint{3,Float64}
+        etype = WPB.LagrangePoint{3,Float64}
     elseif occursin("Line",name)
-    etype = LagrangeLine{num_nodes,T}
+    etype = WPB.LagrangeLine{num_nodes,T}
     elseif occursin("Triangle",name)
-        etype = LagrangeTriangle{num_nodes,T}
+        etype = WPB.LagrangeTriangle{num_nodes,T}
     elseif occursin("Quadrilateral",name)
-        etype = LagrangeSquare{num_nodes,T}
+        etype = WPB.LagrangeSquare{num_nodes,T}
     elseif occursin("Tetrahedron",name)
-        etype = LagrangeTetrahedron{num_nodes,T}
+        etype = WPB.LagrangeTetrahedron{num_nodes,T}
     else
         error("gmsh element of family $name does not an internal equivalent")
     end
@@ -288,7 +288,7 @@ end
 Mapping of internal element types, to the integer tag of `gmsh` elements. This
 function assumes `gmsh` has been initialized.
 """
-function _etype_to_type_tag(el::LagrangeElement)
+function _etype_to_type_tag(el::WPB.LagrangeElement)
     etype = typeof(el)
     tag = 1
     while true
@@ -321,13 +321,13 @@ Some important points to keep in mind (which make this *hacky*):
 !!! warning
   This is an experimental feature and should be used with caution.
 """
-struct GmshParametricEntity{M} <: AbstractEntity
+struct GmshParametricEntity{M} <: WPB.AbstractEntity
     tag::Int
-    domain::HyperRectangle{M,Float64}
+    domain::WPB.HyperRectangle{M,Float64}
     function GmshParametricEntity{M}(tag,domain) where {M}
         dim = M
         ent = new{M}(dim,domain)
-        global_add_entity!(ent)
+        WPB.global_add_entity!(ent)
         return ent
     # TODO: throw a warning if the surface is trimmed
     end
@@ -335,7 +335,7 @@ end
 
 function GmshParametricEntity(dim::Int,tag::Int,model=gmsh.model.getCurrent())
     low_corner,high_corner = gmsh.model.getParametrizationBounds(dim,tag)
-    rec = HyperRectangle(low_corner,high_corner)
+    rec = WPB.HyperRectangle(low_corner,high_corner)
     return GmshParametricEntity{dim}(tag,rec)
 end
 GmshParametricEntity(dim::Integer,tag::Integer,args...;kwargs...) = GmshParametricEntity(Int(dim),Int(tag),args...;kwargs...)
@@ -350,7 +350,7 @@ function (par::GmshParametricEntity{N})(x) where {N}
     end
 end
 
-function jacobian(psurf::GmshParametricEntity{N},s::SVector) where {N}
+function WPB.jacobian(psurf::GmshParametricEntity{N},s::SVector) where {N}
     if N==1
         jac = gmsh.model.getDerivative(N,psurf.tag,s)
         return SMatrix{3,1}(jac)

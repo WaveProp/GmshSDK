@@ -40,14 +40,19 @@ example of such a usage would be:
 
 ```julia
 using GmshSDK, Plots
-Ω,M = GmshSDK.sphere() # create and mesh a unit sphere
-Γ   = Geometry.boundary(Ω) # extract the boundary
+import WavePropBase as WPB
+Ω,M = @gmsh begin
+    WPB.clear_entities!()
+    gmsh.model.occ.addSphere(0,0,0,1)
+    gmsh.model.occ.synchronize()
+    gmsh.model.mesh.generate(3)
+    Ω = GmshSDK.domain()
+    M = GmshSDK.meshgen(Ω)
+    return Ω,M
+end
+Γ = WPB.boundary(Ω) # extract the boundary
 plot(view(M,Γ)) # plot the elements of the mesh on Γ
 ```
-
-For more information, see the documentation for the functions in the
-`src/gmshIO.jl` file and the `Geometry` and `Mesh` modules on [`WavePropBase`](https://github.com/WaveProp/WavePropBase).
-
 
 ## Version and Artifact generation
 

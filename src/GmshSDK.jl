@@ -1,15 +1,12 @@
 module GmshSDK
 
+const PROJECT_ROOT =  pkgdir(GmshSDK)
+
 using Artifacts
 using StaticArrays
 using RecipesBase
-using OrderedCollections
 using Printf
-
-using WavePropBase
-using WavePropBase.Geometry
-using WavePropBase.Interpolation
-using WavePropBase.Mesh
+import WavePropBase as WPB
 
 const GMSH_VERSION   = "4.8.4"
 
@@ -25,11 +22,6 @@ include("gmshIO.jl")
 
 export
     gmsh,
-    # re-export useful modules from WavePropBase
-    Geometry,
-    Mesh,
-    # macros
     @gmsh
-    # methods
 
 end # module
